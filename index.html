@@ -49,7 +49,7 @@
 			display: block;
 		}
 		#face-id-face {
-			animation: faceIdFaceFadeOut .2s .3s ease-in forwards;
+			animation: faceIdFaceFadeOut .2s 0.8s ease-in forwards;
 		}
 		@keyframes faceIdFaceFadeOut {
 			to { opacity: 0; }
@@ -103,14 +103,14 @@
 			height: 65px;
 			opacity: .7;
 		}
-		#face-id-circle-one {
-			animation: faceIdColorOne 1s .3s linear forwards, faceIdMovementOne 1s .3s ease-out forwards;
+		#face-id.start-anim #face-id-circle-one {
+			animation: faceIdColorOne 1.5s linear forwards, faceIdMovementOne 1.5s ease-out forwards;
 		}
-		#face-id-circle-one-1 {
-			animation: faceIdColorOne 1s .375s linear forwards, faceIdMovementOne 1s .375s ease-out forwards, faceIdPseudo 1s .375s linear forwards;
+		#face-id.start-anim #face-id-circle-one-1 {
+			animation: faceIdColorOne 1.5s 0.15s linear forwards, faceIdMovementOne 1.5s 0.15s ease-out forwards, faceIdPseudo 1.5s 0.15s linear forwards;
 		}
-		#face-id-circle-one-2 {
-			animation: faceIdColorOne 1s .45s linear forwards, faceIdMovementOne 1s .45s ease-out forwards, faceIdPseudo 1s .45s linear forwards;
+		#face-id.start-anim #face-id-circle-one-2 {
+			animation: faceIdColorOne 1.5s 0.3s linear forwards, faceIdMovementOne 1.5s 0.3s ease-out forwards, faceIdPseudo 1.5s 0.3s linear forwards;
 		}
 		@keyframes faceIdColorOne {
 			20% {
@@ -162,14 +162,14 @@
 			}
 		}
 
-		#face-id-circle-two {
-			animation: faceIdColorTwo 1s .3s linear forwards, faceIdMovementTwo 1s .3s ease-out forwards;
+		#face-id.start-anim #face-id-circle-two {
+			animation: faceIdColorTwo 1.5s linear forwards, faceIdMovementTwo 1.5s ease-out forwards;
 		}
-		#face-id-circle-two-1 {
-			animation: faceIdColorTwo 1s .375s linear forwards, faceIdMovementTwo 1s .375s ease-out forwards, faceIdPseudo 1s .375s linear forwards;
+		#face-id.start-anim #face-id-circle-two-1 {
+			animation: faceIdColorTwo 1.5s 0.15s linear forwards, faceIdMovementTwo 1.5s 0.15s ease-out forwards, faceIdPseudo 1.5s 0.15s linear forwards;
 		}
-		#face-id-circle-two-2 {
-			animation: faceIdColorTwo 1s .45s linear forwards, faceIdMovementTwo 1s .45s ease-out forwards, faceIdPseudo 1s .45s linear forwards;
+		#face-id.start-anim #face-id-circle-two-2 {
+			animation: faceIdColorTwo 1.5s 0.3s linear forwards, faceIdMovementTwo 1.5s 0.3s ease-out forwards, faceIdPseudo 1.5s 0.3s linear forwards;
 		}
 		@keyframes faceIdColorTwo {
 			20% {
@@ -213,6 +213,25 @@
 		#face-id.shake {
 			animation: faceIdShake 0.5s cubic-bezier(.36,.07,.19,.97) both;
 		}
+
+		#face-id.start-anim svg #face-id-x1,
+		#face-id.start-anim svg #face-id-x2 {
+			stroke: #fff;
+			stroke-width: 4px;
+			animation: faceIdX .5s 1.8s ease-out forwards;
+		}
+		@keyframes faceIdX {
+			to { stroke-dashoffset: 0; }
+		}
+
+		#face-id-x1, #face-id-x2 {
+			opacity: 0;
+			transition: opacity 0.2s;
+		}
+		#face-id.show-x #face-id-x1,
+		#face-id.show-x #face-id-x2 {
+			opacity: 1;
+		}
 	</style>
 </head>
 
@@ -234,9 +253,9 @@
 				<use xlink:href="#face-id-corner" transform="matrix(0 1 -1 0 80 0)"/>
 				<use xlink:href="#face-id-corner" transform="matrix(0 -1 1 0 0 80)"/>
 				<use xlink:href="#face-id-corner" transform="matrix(-1 0 0 -1 80 80)"/>
-				<animate xlink:href="#face-id-corner" attributeName="d" attributeType="XML" from="M2,22.5 L2,14 Q2,2 14,2 L22.5,2" to="M8,30 L8,30 Q8,8 30,8 L38,8" begin=".3s" dur=".5s" repeatCount="once" fill="freeze" />
-				<animate xlink:href="#face-id-corner" attributeName="stroke-width" attributeType="XML" from="4" to="6" begin=".3s" dur=".5s" repeatCount="once" fill="freeze" />
-				<animate xlink:href="#face-id-corner" attributeName="opacity" attributeType="XML" from="1" to="0" begin=".3s" dur=".5s" repeatCount="once" fill="freeze" />
+				<animate xlink:href="#face-id-corner" attributeName="d" attributeType="XML" from="M2,22.5 L2,14 Q2,2 14,2 L22.5,2" to="M8,30 L8,30 Q8,8 30,8 L38,8" begin="1.8s" dur=".5s" repeatCount="once" fill="freeze" />
+				<animate xlink:href="#face-id-corner" attributeName="stroke-width" attributeType="XML" from="4" to="6" begin="1.8s" dur=".5s" repeatCount="once" fill="freeze" />
+				<animate xlink:href="#face-id-corner" attributeName="opacity" attributeType="XML" from="1" to="0" begin="1.8s" dur=".5s" repeatCount="once" fill="freeze" />
 			</g>
 			<g id="face-id-face">
 				<use xlink:href="#face-id-eye" transform="translate(23.5 30)"/>
@@ -244,7 +263,8 @@
 				<path d="M42,30 L42,45 Q42,48.5 38.5,48.5 L37,48.5"/>
 				<circle cx=40 cy=43.5 r=19 stroke-dashoffset="-16" stroke-dasharray="28 90"></circle>
 			</g>
-			<path id="face-id-tick" d="M25,45 l10,10 l20,-25" stroke-dashoffset="50" stroke-dasharray="50"></path>
+			<path id="face-id-x1" d="M28,26 l24,24" stroke="#fff" stroke-width="4" fill="none"></path>
+			<path id="face-id-x2" d="M52,26 l-24,24" stroke="#fff" stroke-width="4" fill="none"></path>
 		</svg>
 		<div id="face-id-circles">
 			<div id="face-id-circle-one"></div>
@@ -258,19 +278,6 @@
 	<script>
 	(function() {
 		const faceId = document.getElementById('face-id');
-		let failCount = 0;
-
-		function continueSequence() {
-			failCount++;
-			if (failCount < 2) {
-				setTimeout(continueSequence, 700); // Retry after short pause
-			} else {
-				faceId.classList.add('fade-out');
-				setTimeout(() => {
-					faceId.style.display = 'none';
-				}, 500); // Wait for fade out
-			}
-		}
 
 		// Shake immediately after box appears, before any other animation
 		faceId.classList.remove('shake');
@@ -280,8 +287,17 @@
 			if (e.animationName !== 'faceIdShake') return;
 			faceId.removeEventListener('animationend', initialShakeEnd);
 			faceId.classList.remove('shake');
-			// Now start the rest of the sequence (no more shakes)
-			setTimeout(continueSequence, 1000);
+			// Start the rest of the sequence
+			faceId.classList.add('start-anim');
+			setTimeout(() => {
+				faceId.classList.add('show-x');
+			}, 900);
+			setTimeout(() => {
+				faceId.classList.add('fade-out');
+				setTimeout(() => {
+					faceId.style.display = 'none';
+				}, 500);
+			}, 2300); // 1.5s (circles) + 0.3s (last circle delay) + 0.5s (X) = 2.3s
 		});
 	})();
 	</script>
