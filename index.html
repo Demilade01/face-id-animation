@@ -199,6 +199,20 @@
 				transform: rotate3d(1, 0, -999, -180deg);
 			}
 		}
+
+		@keyframes faceIdShake {
+			0% { transform: translateX(0); }
+			10% { transform: translateX(-12px); }
+			26% { transform: translateX(12px); }
+			42% { transform: translateX(-10px); }
+			58% { transform: translateX(10px); }
+			74% { transform: translateX(-6px); }
+			90% { transform: translateX(6px); }
+			100% { transform: translateX(0); }
+		}
+		#face-id.shake {
+			animation: faceIdShake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+		}
 	</style>
 </head>
 
@@ -241,4 +255,34 @@
 			<div id="face-id-circle-two-2"></div>
 		</div>
 	</div>
+	<script>
+	(function() {
+		const faceId = document.getElementById('face-id');
+		let failCount = 0;
+
+		function continueSequence() {
+			failCount++;
+			if (failCount < 2) {
+				setTimeout(continueSequence, 700); // Retry after short pause
+			} else {
+				faceId.classList.add('fade-out');
+				setTimeout(() => {
+					faceId.style.display = 'none';
+				}, 500); // Wait for fade out
+			}
+		}
+
+		// Shake immediately after box appears, before any other animation
+		faceId.classList.remove('shake');
+		void faceId.offsetWidth;
+		faceId.classList.add('shake');
+		faceId.addEventListener('animationend', function initialShakeEnd(e) {
+			if (e.animationName !== 'faceIdShake') return;
+			faceId.removeEventListener('animationend', initialShakeEnd);
+			faceId.classList.remove('shake');
+			// Now start the rest of the sequence (no more shakes)
+			setTimeout(continueSequence, 1000);
+		});
+	})();
+	</script>
 </body>
